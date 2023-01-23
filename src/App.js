@@ -1,7 +1,6 @@
 import React from 'react';
 import Welcome from './Welcome'
 import Question from './components/Question'
-import Answers from './components/Answers';
 import { nanoid } from 'nanoid'
 
 
@@ -9,8 +8,6 @@ function App() {
   const [showWelcome, setShowWelcome] = React.useState(true)
   const [quizData, setQuizData] = React.useState([])
   const [selectedChoice, setSelectedChoice] = React.useState([])
-
-  console.log(quizData)
 
   React.useEffect(() => {
     const getQuizData = async () => {
@@ -42,19 +39,26 @@ function App() {
     setShowWelcome(prevWelcomeState => !prevWelcomeState)
   }
 
-  function handleClickChoice(event) {
-    console.log(event.target.textContent)
-  }
+  const handleSelectedAnswer = (id, selectedAnswer) => {
+    console.log(id, selectedAnswer)
+    setQuizData((quizData) =>
+      quizData.map((data) => {
+        return data.id === id ? { ...data, selected: selectedAnswer } : data;
+      })
+    );
+    console.log(quizData)
+  };
 
   const questionElements = quizData.map(item => {
     return (
     <Question 
+      id= {item.id}
       key= {item.id}
       question = {item.question} 
       allAnswers = {item.allAnswers}
       correctAnswer = {item.correctAnswer}
-      checked = {item.checked}
-      handleClickChoice={handleClickChoice}
+      quizData = {item}
+      handleSelectedAnswer={handleSelectedAnswer}
     />
     )
   })

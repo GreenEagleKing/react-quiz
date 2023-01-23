@@ -1,9 +1,7 @@
 import React from "react";
-import Answers from "./Answers";
 
 export default function Question(props) {
-
-    console.log(props)
+    const allAnswers = props.allAnswers
 
     function decodeHtml(html) {
         var txt = document.createElement('textarea');
@@ -11,14 +9,23 @@ export default function Question(props) {
         return txt.value;
     }
 
-   
+   const selectedAnswer = (answer) => {
+    if (props.quizData.checked) {
+        return;
+      }
+      props.handleSelectedAnswer(props.id, answer);
+   }
 
-    const possibleAnswers = props.allAnswers.map(item => {
-        console.log(item)
-        return (<Answers 
+    const possibleAnswers = allAnswers.map(item => {
+        return (<button 
+            id={item.id}
             answer={item}
-            handleClickChoice={props.handleClickChoice}
-        />)
+            className={
+                props.quizData.selected === item ? 'selected multiple--choice' : 'multiple--choice'}
+            onClick={() => selectedAnswer(item)}
+            >
+            {decodeHtml(item)}
+            </button> )
     })
 
     return (
