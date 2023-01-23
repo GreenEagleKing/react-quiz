@@ -22,6 +22,7 @@ body {
     top: 0px;
     right: 0px;
     height: 200px;
+    z-index: -1;
 }
 
 #bottom--blob {
@@ -29,6 +30,7 @@ body {
     bottom: 0px;
     left: 0px;
     height: 200px;
+    z-index: -1;
 }
 
 h1, h2, h3 {
@@ -44,7 +46,7 @@ h1, h2, h3 {
     color: white;
 }
 
-.start--btn {
+.btn {
     background-color: rgb(252, 155, 50);
     padding: 1rem;
     font-family: "Karla", sans-serif;
@@ -53,9 +55,47 @@ h1, h2, h3 {
     border-width: 2px;
     border-style: outset;
     cursor: pointer;
+    margin: 0px;
+    margin-top: 2rem;
 }
 
 .start--btn:active {
     transform: translateY(3px);
     box-shadow: inset 0px 10px 10px 10px rgba(179, 88, 28, 0.2);
+}
+
+.question--container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0rem;
+    max-width: 100%;
+
+}
+
+.question {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.answer--container {
+    display: flex;
+}
+
+.multiple--choice{
+    margin: .5rem 2rem .5rem 0rem;
+    padding: 1rem 1rem;
+    border: #293264 2px solid;
+    border-radius: 20px;
+    background-color: beige;
+    line-height: .75rem;
+    font-family: 'Inter', sans-serif;
+    color: #293264;
+    font-size: large;
+}
+
+.multiple--choice:active {
+    background-color: #2932645b;
+    color: white;
 }
