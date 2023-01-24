@@ -1,10 +1,12 @@
 import React from 'react';
-import Welcome from './Welcome'
+import Welcome from './components/Welcome'
 import Question from './components/Question'
 import { nanoid } from 'nanoid'
 
 
 function App() {
+
+  // All the useState variables
   const [showWelcome, setShowWelcome] = React.useState(true)
   const [showCount, setShowCount] = React.useState(false)
   const [quizData, setQuizData] = React.useState([])
@@ -12,6 +14,7 @@ function App() {
   const [checked, setChecked] = React.useState(false)
   const [playQuiz, setPlayQuiz] = React.useState(false)
 
+  // If the showWelcome state is false a new API call is made and populates quizdata state
   React.useEffect(() => {
     if(!showWelcome) {
     const getQuizData = async () => {
@@ -42,11 +45,13 @@ function App() {
     }
   }, [showWelcome]);
 
+  // Run when the start quiz button is clicked
   function startQuiz() {
     setShowWelcome(prevWelcomeState => !prevWelcomeState)
     setPlayQuiz(prevPlayQuiz => !prevPlayQuiz)
   }
-
+  
+  // Updates quizData with which answer has been selected
   const handleSelectedAnswer = (id, selectedAnswer) => {
     setQuizData((quizData) =>
       quizData.map((data) => {
@@ -55,6 +60,7 @@ function App() {
     );
   };
 
+  // When check answer button is clicked the score is added up and quizData checked is updated to true
   function handleCheckAnswers() {
     let currentScore = 0
     quizData.forEach(item => {
@@ -72,6 +78,7 @@ function App() {
     setChecked(true)
   }
 
+  // When answers have been checked the button changes to play again option
   function playAgain() {
     setChecked(false)
     startQuiz()
@@ -94,9 +101,6 @@ function App() {
 
   return (
     <>
-      <img id='top--blob' src='/topblob.png' alt='background graphic blob'></img>
-
-      
       {playQuiz ? (
         <div className='quiz--container'>
           {questionElements}
@@ -109,8 +113,7 @@ function App() {
         <Welcome startQuiz={startQuiz}/>
       )}
 
-      
-
+      <img id='top--blob' src='/topblob.png' alt='background graphic blob'></img>
       <img id='bottom--blob' src='/bottomblob.png' alt='background graphic blob'></img>
     </>
   );
