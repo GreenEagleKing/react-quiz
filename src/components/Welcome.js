@@ -1,10 +1,11 @@
 import React from "react";
 
+// Welcome component to show on arrival at website
 export default function Welcome(props) {
     return (
         <section className='start--quiz'>
-            <h1>Quizzical</h1>
-            <p>Challenge yourself with your daily 5 general knowledge questions.</p>
+            <h1>Daily Quiz</h1>
+            <h2>Five Question A Day Keeps the Chaser's Away!</h2>
             <button className='btn' onClick={props.startQuiz}>Start Quiz</button>
         </section>
     )
